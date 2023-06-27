@@ -1,0 +1,163 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex flex-col flex-auto min-w-0">
+        <!-- Header -->
+        <div class="flex flex-col shadow bg-card">
+            <!-- Cover image -->
+            <div
+                id="header"
+                class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b dark:bg-transparent fondo-app"
+            >
+                <div class="flex-1 min-w-0">
+                    <!-- Title -->
+                    <div >
+                        <h2
+                            class="text-black text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+                        >
+                            Busqueda
+                        </h2>
+                    </div>
+                </div>
+                <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                    <mat-form-field
+                        class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded  w-80"
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:search'"
+                        ></mat-icon>
+                        <input
+                            matInput
+                            [(ngModel)]="buscar"
+                            [autocomplete]="'off'"
+                            [placeholder]="'Busqueda'"
+                            (keyup.enter)="buscarExpedientes()"
+                        />
+                    </mat-form-field>
+                    <button
+                        class="ml-4 bg-black text-white"
+                        mat-flat-button
+
+                        (click)="buscarExpedientes()"
+                    >
+
+                        <span class="ml-2 mr-1">Buscar</span>
+                    </button>
+                    <!-- <button
+                        *ngIf="defService.rolUsuario(usuario)"
+                        class="ml-4 bg-black text-white"
+                        mat-flat-button
+                        (click)="crearExpediente()"
+                    >
+
+                        <span class="ml-2 mr-1">Crear Expediente</span>
+                    </button> -->
+                </div>
+
+            </div>
+
+            <!-- User info -->
+
+        </div>
+        <div >
+            <table mat-table [dataSource]="tabla" class="tabla">
+                <ng-container matColumnDef="nombre">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Nro
+                    </th>
+                    <td
+                        mat-cell
+                        (click)="consultarExpendiente(element.id)"
+                        *matCellDef="let element"
+                        class="cursor-pointer hover:text-blue-500"
+                    >
+                        <a>{{ element.nombre }}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="nro">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Nro
+                    </th>
+                    <td
+                        mat-cell
+                        (click)="consultarExpendiente(element.id)"
+                        *matCellDef="let element"
+                        class="cursor-pointer hover:text-blue-500"
+                    >
+                        <a>{{ element.nro }}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fiscalia">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Fiscalia
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.fiscalia }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="tribunal">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Tribunal
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="">
+                        {{ element.tribunal }}
+                    </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="delito">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Delito
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="">
+                        {{ element.delito }}
+                    </td>
+                </ng-container> -->
+                <ng-container matColumnDef="fecha">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="text-white"
+                    >
+                        Fecha
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="">
+                        {{ element.fecha_creacion | formatoFecha }}
+                    </td>
+                </ng-container>
+                <tr
+                    mat-header-row
+                    *matHeaderRowDef="columns; sticky: true"
+                    class="bg-black"
+                ></tr>
+                <tr
+                    mat-row
+                    *matRowDef="let row; columns: columns"
+                ></tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[10, 20, 30, 100]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </div>
+</div>

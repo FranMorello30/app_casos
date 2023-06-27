@@ -1,0 +1,65 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+.d-none{
+    display: none;
+}
+.d-display{
+    display: block;
+}
+.text-right{
+    text-align: right;    
+}
+.text-left{
+    text-align: left;
+}
+.text-center{
+    text-align: center;
+}
+.altura-pequena{
+    height: 50px;
+}
+.altura-campo{
+    height: 74px;
+}
+.altura-caja-textarea{
+    height: 90px;
+}
+.altura-campo-tabla{
+    height: 60px;
+    width: 370px
+}
+
+.attachment-list {
+    font-size: 13px;
+
+    .attachment {
+        border: 1px solid;
+        border-radius: 20px;
+        padding-left: 16px;
+        margin-top: 8px;
+
+        .filename {
+            font-weight: 600;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.cursor-adjuntos{
+    cursor: pointer;
+}
+.cursor-click{
+    cursor: pointer;
+}
+
+.fondo-app {
+    background-color: #EEA228;
+}
+
+.btn-grabar {
+    background-color: #EEA228 !important;
+}

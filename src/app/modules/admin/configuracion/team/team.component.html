@@ -1,0 +1,98 @@
+<div class="w-full max-w-3xl">
+
+    <!-- Add team member -->
+    <div class="flex flex-0 justify-between">
+        <div class="text-3xl font-bold tracking-tight leading-none">
+            Usuarios
+        </div>
+        <div>
+            <mat-form-field
+            class="fuse-mat-no-subscript w-60"
+            [floatLabel]="'always'">
+            <!-- <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon> -->
+            <input
+                matInput
+                placeholder="Buscar">
+            <button
+                (click)="crearUsuario()"
+                matTooltip="Crear usuario"
+                mat-icon-button
+                matSuffix>
+                <mat-icon
+
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+            </button>
+        </mat-form-field>
+        <!-- <button mat-icon-button  (click)="crearUsuario()">
+            <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+        </button> -->
+        </div>
+
+    </div>
+
+    <!-- Team members -->
+    <div class="flex flex-col mt-8 divide-y border-t border-b">
+        <ng-container *ngFor="let member of members; trackBy: trackByFn;">
+            <div class="flex flex-col sm:flex-row sm:items-center py-6">
+                <div class="flex items-center">
+                    <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+                        <ng-container *ngIf="member.avatar">
+                            <img
+                                class="object-cover w-full h-full"
+                                src="assets/images/avatars/profile.jpg"
+                                alt="Contact avatar"/>
+                        </ng-container>
+                        <ng-container *ngIf="!member.avatar">
+                            <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{member.nombre.charAt(0)}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="ml-4">
+                        <div class="font-medium">{{member.cargo | formatoNombre  }} {{member.nombre}} {{member.apellido}}</div>
+                        <div class="text-secondary">Correo: {{member.correo}} Teléfono: {{member.telefono}}</div>
+                    </div>
+                </div>
+                <div class="flex items-center mt-4 sm:mt-0 sm:ml-auto">
+                    <div class="order-2 sm:order-1 ml-4 sm:ml-0">
+                        <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-40">
+                            <mat-select
+                                (selectionChange)="cambiarRolUsuario($event, member)"
+                                [panelClass]="'w-72 min-w-72 max-w-72 h-auto max-h-none'"
+                                [value]="member.rol"
+                                disableOptionCentering
+                                #roleSelect="matSelect">
+                                <mat-select-trigger class="text-md">
+                                    <span>Rol:</span>
+                                    <span class="ml-1 font-medium">{{roleSelect.value | titlecase}}</span>
+                                </mat-select-trigger>
+                                <ng-container *ngFor="let role of roles">
+                                    <mat-option
+                                        class="h-auto py-4 leading-none"
+                                        [value]="role.value">
+                                        <div class="font-medium">{{role.label}}</div>
+                                        <div class="mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.description}}</div>
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="order-1 sm:order-2 sm:ml-3">
+                        <button mat-icon-button (click)="borrarUsuario(member)">
+                            <mat-icon
+                                class="text-hint"
+                                [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+</div>

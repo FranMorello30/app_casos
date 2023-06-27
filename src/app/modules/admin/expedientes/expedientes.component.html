@@ -1,0 +1,846 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex flex-col flex-auto min-w-0">
+        <!-- Header -->
+        <div class="flex flex-col shadow bg-card">
+            <!-- Cover image -->
+            <div
+                id="header"
+                class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b dark:bg-transparent fondo-app"
+            >
+                <div class="flex-1 min-w-0">
+                    <!-- Title -->
+                    <div >
+                        <h2
+                            class="text-black text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+                        >
+                            Expediente
+                        </h2>
+                        <!-- {{ idExpendiente }} -->
+                        <!-- <small class="text-black"
+                            >Caso: Mano negra Pieza: Nro 1</small
+                        > -->
+                    </div>
+                </div>
+                <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+                    <!-- <button
+                        class="ml-4 bg-black text-white"
+                        mat-flat-button
+                    >
+
+                        <span class="ml-2 mr-1 "></span>
+                    </button> -->
+                    <upload-archivo
+                        class="ml-2 mr-1 "
+                        [titulo]="'Subir Adjuntos Expediente'"
+                        (files)="recibirArchivo($event)"
+                    ></upload-archivo>
+
+                    <button
+                        *ngIf="defService.rolUsuario(usuario)"
+                        class="ml-4 bg-black text-white"
+                        mat-flat-button (click)="grabar()">
+                        <span class="ml-2 mr-1">Grabar</span>
+                    </button>
+                </div>
+                <!-- <img
+                    class="h-40 lg:h-40 object-cover"
+                    src="assets/images/pages/profile/cover.jpg"
+                    alt="Cover image"> -->
+            </div>
+
+            <!-- User info -->
+            <div
+                class="flex flex-col flex-0 lg:flex-row items-center max-w-8xl w-full mx-auto px-8 lg:h-18 bg-card"
+            >
+                <!-- Avatar -->
+
+                <!-- Details -->
+                <div
+                    class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-2"
+                >
+                    <button mat-flat-button  (click)="agregarPersona()">
+                        <mat-icon
+                            [svgIcon]="'heroicons_solid:users'"
+                        ></mat-icon>
+                        Agregar Persona
+                    </button>
+                </div>
+                <div class="hidden lg:flex h-8 mx-4 border-l-2"></div>
+                <div
+                    class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-2"
+                >
+                    <button mat-flat-button (click)="agregarVehiculo()">
+                        <mat-icon
+                            [svgIcon]="'mat_solid:directions_car'"
+                        ></mat-icon>
+                        Agregar Vehiculo
+                    </button>
+                </div>
+                <div class="hidden lg:flex h-8 mx-4 border-l-2"></div>
+                <div
+                    class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-2"
+                >
+                    <button mat-flat-button (click)="agregarInmueble()">
+                        <mat-icon [svgIcon]="'mat_solid:apartment'"></mat-icon>
+                        Agregar Inmueble
+                    </button>
+                </div>
+                <div class="hidden lg:flex h-8 mx-4 border-l-2"></div>
+                <div
+                    class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-2"
+                >
+                    <button mat-flat-button (click)="agregarArmamento()">
+                        <mat-icon [svgIcon]="'mat_solid:shield'"></mat-icon>
+                        Agregar Armamento
+                    </button>
+                </div>
+                <div class="hidden lg:flex h-8 mx-4 border-l-2"></div>
+                <div
+                    class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-2"
+                >
+                    <button mat-flat-button (click)="agregarOrganizacion()">
+                        <mat-icon
+                            [svgIcon]="'mat_solid:account_tree'"
+                        ></mat-icon>
+                        Agregar Organización
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- [(selectedIndex)]="tabIndice" (selectedTabChange)="cambiarTab($event)" -->
+        <div fxLayout="row" fxFlex>
+            <mat-tab-group [animationDuration]="'0'" class="p-1" fxFlex="50">
+                <mat-tab label="Formulario">
+                    <fuse-card class="m-1" fxFlex>
+                        <form
+                            [formGroup]="formularioExpe"
+                            class="flex flex-col w-full"
+                            autocomplete="off"
+                        >
+                            <div fxLayout="column" class="p-1" fxFlex>
+                                <div class="flex-row">
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="nombre" />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Pieza</mat-label>
+                                        <input matInput formControlName="pieza" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="flex-row">
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Tribunal</mat-label>
+                                        <input matInput formControlName="tribunal" />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Juez</mat-label>
+                                        <input matInput formControlName="juez" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="flex-row">
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Fiscalia</mat-label>
+                                        <input matInput formControlName="fiscalia" />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        class="p-2 altura-campo fuse-mat-dense"
+                                        fxFlex
+                                    >
+                                        <mat-label>Fiscal</mat-label>
+                                        <input matInput formControlName="fiscal" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="flex-row">
+                                    <mat-form-field class="p-2 fuse-mat-dense" fxFlex>
+                                        <mat-label>Delito</mat-label>
+                                        <textarea
+                                            formControlName="delito"
+                                            cdkTextareaAutosize
+                                            cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="1"
+                                            matInput
+                                        ></textarea>
+                                    </mat-form-field>
+
+                                </div>
+                                <div class="flex-row">
+                                    <mat-form-field class="p-2 fuse-mat-dense" fxFlex>
+                                        <mat-label>Observaciones</mat-label>
+                                        <textarea
+                                            formControlName="observaciones"
+                                            cdkTextareaAutosize
+                                            cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="1"
+                                            matInput
+                                        ></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                    </fuse-card>
+                </mat-tab>
+                <mat-tab label="Adjuntos">
+                    <fuse-card class=" m-1" fxFlex="100">
+                        <div class="overflow-x-auto h-120" fxFlex>
+                            <div class="flex flex-col items-center h-120">
+                                <div
+                                    class="w-full h-120 border rounded overflow-hidden"
+                                >
+                                    <ng-container
+                                        *ngIf="
+                                        formularioExpe.get('imagenes').value.length;
+                                            else noImage
+                                        "
+                                    >
+                                        <img
+                                            class="w-full h-full object-cover"
+                                            [src]="
+                                            formularioExpe.get('imagenes').value[
+                                            formularioExpe.get(
+                                                        'currentImageIndex'
+                                                    ).value
+                                                ] | imagen
+                                            "
+                                        />
+                                    </ng-container>
+                                    <ng-template #noImage>
+                                        <img
+                                            class="w-full h-full object-cover"
+                                            src="./assets/images/avatars/no_imagen.png"
+                                        />
+                                    </ng-template>
+                                </div>
+                                <div
+                                    class="flex items-center mt-2 whitespace-nowrap"
+                                    *ngIf="formularioExpe.get('imagenes').value.length"
+                                >
+                                    <button
+                                        mat-icon-button
+                                        (click)="cycleImages(false)"
+                                    >
+                                        <mat-icon
+                                            class="icon-size-5"
+                                            [svgIcon]="
+                                                'heroicons_solid:arrow-narrow-left'
+                                            "
+                                        ></mat-icon>
+                                    </button>
+                                    <span class="font-sm mx-2">
+                                        {{
+                                            formularioExpe.get("currentImageIndex")
+                                                .value + 1
+                                        }}
+                                        de
+                                        {{ formularioExpe.get("imagenes").value.length }}
+                                    </span>
+                                    <button
+                                        mat-icon-button
+                                        (click)="cycleImages(true)"
+                                    >
+                                        <mat-icon
+                                            class="icon-size-5"
+                                            [svgIcon]="
+                                                'heroicons_solid:arrow-narrow-right'
+                                            "
+                                        ></mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fuse-card>
+                </mat-tab>
+            </mat-tab-group>
+
+            <div fxLayout="column"   fxFlex="50">
+                <div class="m-1" fxFlex>
+                    <mat-tab-group [animationDuration]="'0'">
+                        <mat-tab label="Personas">
+                            <div class="overflow-x-auto mx-3 h-70">
+                                <table mat-table [dataSource]="tablaPer">
+                                    <ng-container matColumnDef="nombres">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Nombre
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            (click)="verPersona(element)"
+                                            *matCellDef="let element"
+                                            class="cursor-pointer hover:text-blue-500"
+                                        >
+                                            <a
+                                                >{{ element.nombres }}
+                                                {{ element.apellidos }}</a
+                                            >
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="num_doc">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Cedula
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.num_doc }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="edad">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Edad
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.edad }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="telefono">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Telefono
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.telefono }}
+                                        </td>
+                                    </ng-container>
+                                    <!-- <ng-container matColumnDef="correo">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Correo
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.correo }}
+                                        </td>
+                                    </ng-container> -->
+                                    <ng-container matColumnDef="accion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        ></th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="text-center"
+                                        >
+                                            <button
+                                                [disabled]="!defService.rolUsuario(usuario)"
+                                                mat-icon-button
+                                                (click)="borrarPersona(element)"
+                                            >
+                                                <mat-icon
+                                                    class="text-red-300"
+                                                    svgIcon="mat_solid:delete"
+                                                ></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr
+                                        mat-header-row
+                                        *matHeaderRowDef="
+                                            columnsPersonas;
+                                            sticky: true
+                                        "
+                                        class="bg-black"
+                                    ></tr>
+                                    <tr
+                                        mat-row
+                                        *matRowDef="
+                                            let row;
+                                            columns: columnsPersonas
+                                        "
+                                    ></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Vehiculos">
+                            <div class="overflow-x-auto mx-3 h-70">
+                                <table mat-table [dataSource]="tablaVe">
+                                    <ng-container matColumnDef="placa">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Placa
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            (click)="verVehiculo(element)"
+                                            class="cursor-pointer hover:text-blue-500"
+                                        >
+                                            <a>{{ element.placa }}</a>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="tipo">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Tipo
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.tipo }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="marca">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Marca
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.marca }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="modelo">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Modelo
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.modelo }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="anio">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Año
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.anio }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        ></th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="text-center"
+                                        >
+                                            <button
+                                            [disabled]="!defService.rolUsuario(usuario)"
+                                                mat-icon-button
+                                                (click)="
+                                                    borrarVehiculo(element)
+                                                "
+                                            >
+                                                <mat-icon
+                                                    class="text-red-300"
+                                                    svgIcon="mat_solid:delete"
+                                                ></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr
+                                        mat-header-row
+                                        *matHeaderRowDef="
+                                            columnsVehiculos;
+                                            sticky: true
+                                        "
+                                        class="bg-black"
+                                    ></tr>
+                                    <tr
+                                        mat-row
+                                        *matRowDef="
+                                            let row;
+                                            columns: columnsVehiculos
+                                        "
+                                    ></tr>
+                                </table>
+                                <!-- <mat-paginator [pageSizeOptions]="[10,20,30,100]" showFirstLastButtons > </mat-paginator> -->
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Inmuebles">
+                            <div class="overflow-x-auto mx-3 h-70">
+                                <table mat-table [dataSource]="tablaIn">
+                                    <!-- <ng-container matColumnDef="direccion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Dirección
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.direccion }}
+                                        </td>
+                                    </ng-container> -->
+                                    <ng-container matColumnDef="propietario">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Propietario
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="cursor-pointer hover:text-blue-500"
+                                            (click)="verInmuebles(element)"
+                                        >
+                                            <a>{{ element.propietario }}</a>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="estado">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Estado
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.estado }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="municipio">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Municipio
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.municipio }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="telefono">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Teléfono
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.telefono }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        ></th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="text-center"
+                                        >
+                                            <button
+                                            [disabled]="!defService.rolUsuario(usuario)"
+                                                mat-icon-button
+                                                (click)="
+                                                    borrarInmueble(element)
+                                                "
+                                            >
+                                                <mat-icon
+                                                    class="text-red-300"
+                                                    svgIcon="mat_solid:delete"
+                                                ></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr
+                                        mat-header-row
+                                        *matHeaderRowDef="
+                                            columnsInmuebles;
+                                            sticky: true
+                                        "
+                                        class="bg-black"
+                                    ></tr>
+                                    <tr
+                                        mat-row
+                                        *matRowDef="
+                                            let row;
+                                            columns: columnsInmuebles
+                                        "
+                                    ></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Armamentos">
+                            <div class="overflow-x-auto mx-3 h-70">
+                                <table mat-table [dataSource]="tablaAr">
+                                    <ng-container matColumnDef="marca">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Marca
+                                        </th>
+                                        <td
+                                            class="cursor-pointer hover:text-blue-500"
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            (click)="verArmamento(element)"
+                                        >
+                                            <a>{{ element.marca }}</a>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="modelo">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Modelo
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.modelo }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="serial">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Serial
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class=""
+                                        >
+                                            {{ element.serial }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        ></th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="text-center"
+                                        >
+                                            <button
+                                            [disabled]="!defService.rolUsuario(usuario)"
+                                                mat-icon-button
+                                                (click)="
+                                                    borrarArmamento(element)
+                                                "
+                                            >
+                                                <mat-icon
+                                                    class="text-red-300"
+                                                    svgIcon="mat_solid:delete"
+                                                ></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr
+                                        mat-header-row
+                                        *matHeaderRowDef="
+                                            columnsArmamentos;
+                                            sticky: true
+                                        "
+                                        class="bg-black"
+                                    ></tr>
+                                    <tr
+                                        mat-row
+                                        *matRowDef="
+                                            let row;
+                                            columns: columnsArmamentos
+                                        "
+                                    ></tr>
+                                </table>
+                                <!-- <mat-paginator [pageSizeOptions]="[10,20,30,100]" showFirstLastButtons > </mat-paginator> -->
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Organizaciones">
+                            <div class="overflow-x-auto mx-3 h-70">
+                                <table
+                                    mat-table
+                                    [dataSource]="tablaOr"
+                                    class="tabla"
+                                >
+                                    <ng-container matColumnDef="nombre">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Nombre
+                                        </th>
+                                        <td
+                                            mat-cell
+                                            (click)="verOrganizacion(element)"
+                                            *matCellDef="let element"
+                                            class="cursor-pointer hover:text-blue-500"
+                                        >
+                                            <a>{{ element.nombre }}</a>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="propietario">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                        Propietario
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.propietario }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="telefono">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                        Teléfono
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.telefono }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="tipo">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        >
+                                            Tipo
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{ element.tipo }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th
+                                            mat-header-cell
+                                            *matHeaderCellDef
+                                            class="text-white"
+                                        ></th>
+                                        <td
+                                            mat-cell
+                                            *matCellDef="let element"
+                                            class="text-center"
+                                        >
+                                            <button
+                                            [disabled]="!defService.rolUsuario(usuario)"
+                                                mat-icon-button
+                                                (click)="
+                                                    borrarOrganizacion(element)
+                                                "
+                                            >
+                                                <mat-icon
+                                                    class="text-red-300"
+                                                    svgIcon="mat_solid:delete"
+                                                ></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr
+                                        mat-header-row
+                                        *matHeaderRowDef="
+                                            columnsOrganizacion;
+                                            sticky: true
+                                        "
+                                        class="bg-black"
+                                    ></tr>
+                                    <tr
+                                        mat-row
+                                        *matRowDef="
+                                            let row;
+                                            columns: columnsOrganizacion
+                                        "
+                                    ></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

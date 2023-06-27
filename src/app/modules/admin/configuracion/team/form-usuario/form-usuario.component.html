@@ -1,0 +1,140 @@
+<div class="flex flex-col md:min-w-160 max-h-screen -m-6">
+    <div
+        class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 fondo-app text-black"
+    >
+        <div class="text-lg font-bold">{{ tituloVentana }}</div>
+
+        <button mat-icon-button (click)="cerrarVentana()" [tabIndex]="-1">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"
+            ></mat-icon>
+        </button>
+    </div>
+    <div fusePerfectScrollbar>
+        <form fxFlex [formGroup]="formulario" autocomplete="off">
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex>
+
+                    <div fxLayout="row">
+
+                        <mat-form-field
+                            class="p-2 altura-campo fuse-mat-dense"
+                            fxFlex
+                        >
+                            <mat-label>Usuario</mat-label>
+                            <input
+                                matInput
+                                formControlName="username"
+                            />
+                        </mat-form-field>
+                        <mat-form-field
+                        class="p-2 altura-campo fuse-mat-dense"
+                        fxFlex
+                    >
+                        <mat-label>Clave</mat-label>
+                        <input
+                            matInput
+                            type="password"
+                            formControlName="password"
+                        />
+                    </mat-form-field>
+
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field
+                        class="p-2 altura-campo fuse-mat-dense"
+                        fxFlex
+                    >
+                        <mat-label>Nombre</mat-label>
+                        <input
+                            matInput
+                            formControlName="nombre"
+                        />
+                    </mat-form-field>
+                        <mat-form-field
+                            class="p-2 altura-campo fuse-mat-dense"
+                            fxFlex
+                        >
+                            <mat-label>Apellido</mat-label>
+                            <input
+                                matInput
+                                formControlName="apellido"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field
+                            class="p-2 altura-campo fuse-mat-dense"
+                            fxFlex
+                        >
+                            <mat-label>Teléfono</mat-label>
+                            <input
+                                matInput
+                                formControlName="telefono"
+                            />
+                        </mat-form-field>
+                        <mat-form-field
+                        class="p-2 altura-campo fuse-mat-dense"
+                        fxFlex
+                    >
+                        <mat-label>Correo</mat-label>
+                        <input
+                            matInput
+                            formControlName="correo"
+                        />
+                    </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field
+                            class="p-2 altura-campo fuse-mat-dense"
+                            fxFlex
+                        >
+                            <mat-label>Cargo</mat-label>
+                            <input
+                                matInput
+                                formControlName="cargo"
+                            />
+                        </mat-form-field>
+                        <mat-form-field
+                        class="p-2 altura-campo fuse-mat-dense"
+                        fxFlex
+                    >
+                        <mat-label>Dependencia</mat-label>
+                        <input
+                            matInput
+                            formControlName="dependencia"
+                        />
+                    </mat-form-field>
+                    <mat-form-field
+                        class="p-2 altura-campo fuse-mat-dense"
+                        fxFlex
+                    >
+                        <mat-label>Rol</mat-label>
+                        <mat-select formControlName="rol">
+                            <mat-option *ngFor="let rol of roles" [value]="rol.value">
+                                {{rol.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div
+             class="flex items-center justify-between w-full mt-1 p-1"
+            >
+            <span class="text-red-500 ">* Campos requeridos</span>
+                <button
+                    mat-flat-button
+                    type="button"
+                    [color]="'primary'"
+                    (click)="grabar()"
+                    [disabled]="this.formulario.invalid"
+                >
+                    <mat-icon>save</mat-icon>Grabar
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,470 @@
+<div class="flex flex-col md:min-w-160 max-h-screen -m-6">
+    <div
+        class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 fondo-app text-black"
+    >
+        <div class="text-lg font-bold">
+            {{ tituloVentana }}
+        </div>
+        <div>
+            <button mat-icon-button (click)="cerrarVentana()" [tabIndex]="-1">
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="'heroicons_outline:x'"
+                ></mat-icon>
+            </button>
+        </div>
+    </div>
+    <!--
+[ngClass]="{'d-none': verFormulario}"
+[ngClass]="{'d-none': !verFormulario}"
+
+*ngIf="!verFormulario"
+*ngIf="verFormulario"
+
+
+[ngClass]="verFormulario ? 'd-none' : 'd-display'" class="border-2 border-dashed border-gray-300"
+ -->
+    <div fusePerfectScrollbar>
+        <mat-tab-group [animationDuration]="'0'"  class="p-1" [(selectedIndex)]="tabIndice" (selectedTabChange)="cambiarTab($event)">
+            <mat-tab label="Formulario">
+
+                <form autocomplete="off" [formGroup]="formulario" fxLayout="column">
+                    <div fxLayout="row" fxFlex="100" >
+                        <div fxFlex="55">
+                            <div fxLayout="row">
+                                <div fxLayout="column" fxFlex>
+                                    <div fxLayout="row">
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Nombres</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="nombres"
+                                            />
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Apellidos</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="apellidos"
+                                            />
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Nro Id</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="num_doc"
+                                            />
+                                            <mat-select formControlName="tipo_doc" floatlLabel="never" class="text-black"
+                                                matPrefix>
+                                                <mat-option *ngFor="let tipo of tiposDoc" [value]="tipo" class="text-black">
+                                                    {{tipo}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Fecha Nacimiento</mat-label>
+                                            <input
+                                                matInput
+                                                [matDatepicker]="fecha"
+                                                formControlName="fec_nacimiento"
+                                            />
+                                            <mat-datepicker-toggle
+                                                matSuffix
+                                                [for]="fecha"
+                                            ></mat-datepicker-toggle>
+                                            <mat-datepicker #fecha></mat-datepicker>
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Alias</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="alias"
+                                            />
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Teléfono</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="telefono"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Correo</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="correo"
+                                            />
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Trabajo</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="trabajo"
+                                            />
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Nacionalidad</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="nacionalidad"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <mat-form-field
+                                            class="px-1 fuse-mat-dense "
+                                            fxFlex
+                                        >
+                                            <mat-label>Dirección</mat-label>
+                                            <textarea
+                                                cdkTextareaAutosize
+                                                cdkAutosizeMinRows="2"
+                                                cdkAutosizeMaxRows="2"
+                                                matInput
+                                                formControlName="direccion"
+                                            ></textarea>
+                                        </mat-form-field>
+                                        <!-- <mat-form-field
+                                            class="px-1 fuse-mat-dense "
+                                            fxFlex
+                                        >
+                                            <mat-label
+                                                >Dirección Secundaria</mat-label
+                                            >
+                                            <textarea
+                                                cdkTextareaAutosize
+                                                cdkAutosizeMinRows="1"
+                                                cdkAutosizeMaxRows="1"
+                                                matInput
+                                                formControlName="direccion_secundaria"
+                                            ></textarea>
+                                        </mat-form-field> -->
+                                        <mat-form-field
+                                            class="px-1 fuse-mat-dense "
+                                            fxFlex
+                                        >
+                                            <mat-label>Dirección Trabajo</mat-label>
+                                            <textarea
+                                                cdkTextareaAutosize
+                                                cdkAutosizeMinRows="2"
+                                                cdkAutosizeMaxRows="2"
+                                                matInput
+                                                formControlName="direccion_trabajo"
+                                            ></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" >
+                                        <mat-form-field
+                                            class="px-1 fuse-mat-dense "
+                                            fxFlex
+                                        >
+                                            <mat-label>Observaciones</mat-label>
+                                            <textarea
+                                                cdkTextareaAutosize
+                                                cdkAutosizeMinRows="3"
+                                                cdkAutosizeMaxRows="3"
+                                                matInput
+                                                formControlName="observaciones"
+                                            ></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="column" fxFlex>
+                            <div fxLayout="column" fxFlex class="border p-1 rounded-2xl bg-gray-400">
+                                <mat-form-field class="flex-auto fuse-mat-dense px-1 pb-0">
+                                    <mat-label class="text-white">Redes Sociales</mat-label>
+                                    <input
+                                        formControlName="url"
+                                        matInput
+                                        placeholder="Url">
+                                    <mat-select formControlName="provide" placeholder="Proveedor" floatlLabel="never" class="text-black"
+                                        matPrefix>
+                                        <mat-option *ngFor="let social of socialNetworks" [value]="social" class="text-black">
+                                            {{social}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <button mat-icon-button type="button" (click)="agregarRedSocial()">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                                    </button>
+                                </mat-form-field>
+                                <div class="h-40 p-2 bg-card shadow-sm rounded-xl m-0" style="overflow: scroll;" >
+                                    <div class="divide-y">
+                                        <ng-container *ngFor="let red of redesSociales;">
+                                            <div class="flex flex-row items-center justify-between p-1" >
+                                                <div class="flex flex-col">
+                                                    <div class="font-medium">{{ red.provide }} {{ red.url }} </div>
+                                                </div>
+                                                <button mat-icon-button>
+                                                    <mat-icon [svgIcon]="'mat_solid:delete'"></mat-icon>
+                                                </button>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-full h-80 border rounded overflow-hidden"
+                                >
+                                    <ng-container
+                                        *ngIf="
+                                            formulario.get('imagenes').value.length;
+                                            else noImage
+                                        "
+                                    >
+                                        <img
+                                            class="w-full h-full object-cover"
+                                            [src]="
+                                                formulario.get('imagenes').value[
+                                                    formulario.get(
+                                                        'currentImageIndex'
+                                                    ).value
+                                                ] | imagen
+                                            "
+                                        />
+                                    </ng-container>
+                                    <ng-template #noImage>
+                                        <!-- <span
+                                            class="flex items-center min-h-20 text-lg font-semibold"
+                                            >NO IMAGE</span
+                                        > -->
+                                        <img
+                                            class="w-full h-full object-cover"
+                                            src="./assets/images/avatars/no_imagen.png"
+                                        />
+                                    </ng-template>
+                                </div>
+                                <div
+                                    class="flex items-center mt-2 whitespace-nowrap"
+                                    *ngIf="formulario.get('imagenes').value.length"
+                                >
+                                    <button
+                                        type="button"
+                                        mat-icon-button
+                                        (click)="cycleImages(false)"
+                                    >
+                                        <mat-icon
+                                            class="icon-size-5"
+                                            [svgIcon]="
+                                                'heroicons_solid:arrow-narrow-left'
+                                            "
+                                        ></mat-icon>
+                                    </button>
+                                    <span class="font-sm mx-2">
+                                        {{
+                                            formulario.get("currentImageIndex")
+                                                .value + 1
+                                        }}
+                                        de
+                                        {{ formulario.get("imagenes").value.length }}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        mat-icon-button
+                                        (click)="cycleImages(true)"
+                                    >
+                                        <mat-icon
+                                            class="icon-size-5"
+                                            [svgIcon]="
+                                                'heroicons_solid:arrow-narrow-right'
+                                            "
+                                        ></mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div *ngIf="defService.rolUsuario(usuario)" class="flex items-center justify-between w-full  mt-1">
+                        <upload-archivo
+                            [titulo]="'Subir fotos'"
+                            (files)="recibirArchivo($event)"
+                        ></upload-archivo>
+
+                        <div>
+                            <span class="text-red-500 ">* Campos requeridos</span>
+                        </div>
+
+                        <button
+                            [disabled]="this.formulario.invalid"
+                            mat-flat-button
+                            type="button"
+                            class="btn-grabar"
+                            (click)="grabar()"
+                        >
+                            <mat-icon>save</mat-icon>Grabar
+                        </button>
+                </div>
+            </mat-tab>
+            <mat-tab label="Tabla">
+                <div class="flex justify-between mb-1">
+                    <button  class="m-0" mat-flat-button [color]="'primary'" [matMenuTriggerFor]="listaExportar">
+                        <span>Exportar</span>
+                    </button>
+                    <mat-menu #listaExportar="matMenu" yPosition="above">
+                        <button
+                            (click)="exportExcel()"
+                            mat-menu-item>
+                            <span>Excel</span>
+                        </button>
+                        <button
+                            (click)="exportPdf()"
+                            mat-menu-item>
+                            <span>Pdf</span>
+                        </button>
+
+                    </mat-menu>
+
+                    <mat-form-field
+                        class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded w-80"
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:search'"
+                        ></mat-icon>
+                        <input
+                            matInput
+                            [(ngModel)]="buscar"
+                            (keyup)="busquedaTabla()"
+                            autocomplete="off"
+                            placeholder="Busqueda"
+                        />
+                    </mat-form-field>
+
+                </div>
+                    <table mat-table [dataSource]="tablaPersonas" class="tabla">
+                        <ng-container matColumnDef="nombres">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                                Nombre
+                            </th>
+                            <td
+                                mat-cell
+                                (click)="seleccionar(element)"
+                                *matCellDef="let element"
+                                class="cursor-pointer hover:text-blue-500"
+                            >
+                                <a
+                                    >{{ element.nombres }}
+                                    {{ element.apellidos }}</a
+                                >
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="num_doc">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                                Cedula
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.num_doc }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="edad">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                                Edad
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="">
+                                {{ element.edad }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="telefono">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                                Telefono
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="">
+                                {{ element.telefono }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="correo">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                                Correo
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="">
+                                {{ element.correo }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="acciones">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-white"
+                            >
+                            Acciones
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="">
+                                <button  (click)="verRegistro(element)" mat-icon-button>
+                                    <mat-icon svgIcon="heroicons_outline:eye"></mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="columns; sticky: true"
+                            class="bg-black"
+                        ></tr>
+                        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                    </table>
+                    <mat-paginator
+                        [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements"
+                    ></mat-paginator>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

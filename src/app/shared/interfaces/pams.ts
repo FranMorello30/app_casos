@@ -1,0 +1,47 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+export interface Pam {
+    id:                       number;
+    id_pam:                   number;
+    rut_paciente:             string;
+    tipo_prestacion:          string;
+    rut_isapre:               string;
+    nro_folio:                string;
+    fec_inicio:               Date | string;
+    fec_enganche:             Date | string;
+    fec_ult_gestion:          Date | string;
+    fec_prox_gestion:         Date | string;
+    fec_asignacion:           string;
+    fec_ini_asignacion:       string;
+    fec_limite:               string;
+    fec_carga:                Date | string;
+    fec_recep_isapre:         Date | string;
+    valor_prestacion:         string;
+    deuda_inicial:            string;
+    deuda_actual:             string;
+    deuda_copago_inicial:     string;
+    deuda_copago_actual:      string;
+    deuda_xbonificar_inicial: string;
+    deuda_xbonificar_actual:  string;
+    BonosAntiguos:            string;
+    BonosAnteriores:          string;
+    bonos_recibidos:          string;
+    CopagosAntiguos:          string;
+    CopagosAnteriores:        string;
+    copagos_recibidos:        string;
+    PrestOncoComercial:       string;
+    BonosOncoComercial:       string;
+    CopagoOncoComercial:      string;
+    PrestOncoRed:             string;
+    BonosOncoRed:             string;
+    CopagoOncoRed:            string;
+    MtoDscto:                 string;
+    clasificacion:            string;
+    status:                   string;
+    status2:                  string;
+    usr_asignado:             number;
+    fallecido:                number;
+    DiasAntiguedad:           number;
+    createdAt:                null;
+    updatedAt:                null;
+    borrado:                  boolean;
+}
