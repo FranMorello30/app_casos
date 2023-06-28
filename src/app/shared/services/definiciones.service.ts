@@ -178,6 +178,6 @@ export class DefinicionesService {
     }
     public rolUsuario(usuario: Usuario): boolean
     {
-        return  (usuario.rol === 'operador') ? false : true
+        return  (usuario.rol === 'OPERADOR') ? false : true
     }
 }

@@ -15,10 +15,18 @@
                         >
                             Expediente
                         </h2>
-                        <!-- {{ idExpendiente }} -->
-                        <!-- <small class="text-black"
-                            >Caso: Mano negra Pieza: Nro 1</small
-                        > -->
+                        <!-- -->
+                        <div *ngIf="expediente" class="text-black  leading-6 truncate">
+                            {{ expediente.nro }} -  <span
+                            class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
+                            [ngClass]="{'bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50': expediente.estado === 'CERRADO',
+                                        'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': expediente.estado === 'ABIERTO'}">
+                            <span class="leading-relaxed whitespace-nowrap">{{expediente.estado}}</span>
+                        </span> <br>
+                            Investigador {{ expediente.investigador.cargo | formatoNombre }}  {{ expediente.investigador.nombre }} {{ expediente.investigador.apellido }}
+
+                        </div
+                        >
                     </div>
                 </div>
                 <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
@@ -132,8 +140,14 @@
                                         fxFlex
                                     >
                                         <mat-label>Pieza</mat-label>
-                                        <input matInput formControlName="pieza" />
+                                        <!-- <input matInput formControlName="pieza" /> -->
+                                        <mat-select formControlName="pieza">
+                                            <mat-option *ngFor="let pieza of piezasExpediente" [value]="pieza">
+                                                {{pieza}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
+
                                 </div>
                                 <div class="flex-row">
                                     <mat-form-field

@@ -70,16 +70,22 @@ export class AuthService {
                 password : credenciales.password
             })
             .pipe(
-                switchMap((response: LoginResponse) => {                    
+                switchMap((response: any) => {
                     const token = response.token;
                     this.accessToken = token;
                     this._authenticated = true;
                     this._userService.user = {
-                        nombre: response.nombre,
-                        email: response.correo,
-                        estado: '',
-                        rol: response.rol,
-                        telefono: response.telefono,
+                        id:            response.id,
+                        username:      response.username,
+                        nombre:        response.nombre,
+                        apellido:      response.apellido,
+                        telefono:      response.telefono,
+                        correo:        response.correo,
+                        cargo:         response.cargo,
+                        dependencia:   response.dependencia,
+                        avatar:        response.avatar,
+                        rol:           response.rol,
+                        estado: ''
                     };
                     return of(response);
                 })
@@ -96,16 +102,22 @@ export class AuthService {
                 // Return false
                 of(false)
             ),
-            switchMap((response: LoginResponse) => {                
+            switchMap((response: any) => {
                 //const token = response.token;
                 //this.accessToken = token;
                 this._authenticated = true;
                 this._userService.user = {
-                    nombre: response.nombre,
-                    email: response.correo,
-                    estado: '',
-                    rol: response.rol,
-                    telefono: response.telefono,
+                    id:            response.id,
+                    username:      response.username,
+                    nombre:        response.nombre,
+                    apellido:      response.apellido,
+                    telefono:      response.telefono,
+                    correo:        response.correo,
+                    cargo:         response.cargo,
+                    dependencia:   response.dependencia,
+                    avatar:        response.avatar,
+                    rol:           response.rol,
+                    estado: ''
                 };
                 return of(response);
             })

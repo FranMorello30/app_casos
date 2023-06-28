@@ -38,6 +38,7 @@ export class BusquedaComponent implements OnInit {
         'nro',
         'fiscalia',
         'tribunal',
+        'estado'
     ];
     public tabla: MatTableDataSource<any>;
     public buscar: string;

@@ -1,15 +1,19 @@
 export class Usuario {
-    nombre: string;
-    email: string;
-    avatar?: string;
-    rol: string;
-    telefono: string;
+    id:            string;
+    username:      string;
+    nombre:        string;
+    apellido:      string;
+    telefono:      string;
+    correo:        string;
+    cargo:         string;
+    dependencia:   string;
+    avatar:        string;
+    rol:           Rol;
+    ultimo_acceso?:string;
+    password?:     string;
+    status?:       boolean;
     estado?: string;
-    token?: string;
 }
 export type Rol = 'ADMINISTRADOR' | 'OPERADOR' | 'SUPERVISOR' | 'INVESTIGADOR';
 
-export interface LoginResponse{
-    token: string;
-    usuario: Usuario;
-}
+

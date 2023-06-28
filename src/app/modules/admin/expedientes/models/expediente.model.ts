@@ -1,3 +1,4 @@
+import { Usuario } from "@shared/models/usuario.model";
 import { Armamento } from "../components/armamentos/models/armamentos.response";
 import { Inmueble } from "../components/inmuebles/models/inmuebles.response";
 import { Organizacion } from "../components/organizaciones/models/organizaciones.response";
@@ -17,9 +18,11 @@ export interface Expediente {
     juez:     string;
     nombre:     string;
     tribunal:     string;
+    estado:     string;
     delito:       string;
     observaciones:  string;
     fecha_creacion:        Date;
+    investigador: Usuario;
     imagenes: string[];
     id_vehiculos: Vehiculo[];
     id_armas:     Armamento[];

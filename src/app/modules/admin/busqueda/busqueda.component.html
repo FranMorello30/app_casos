@@ -119,18 +119,17 @@
                         {{ element.tribunal }}
                     </td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="delito">
-                    <th
-                        mat-header-cell
-                        *matHeaderCellDef
-                        class="text-white"
-                    >
-                        Delito
-                    </th>
-                    <td mat-cell *matCellDef="let element" class="">
-                        {{ element.delito }}
-                    </td>
-                </ng-container> -->
+                   <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef class="text-center text-white"> Estado </th>
+                  <td mat-cell *matCellDef="let element" class="text-center">
+                    <span
+                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
+                                        [ngClass]="{'bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50': element.estado === 'CERRADO',
+                                                    'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': element.estado === 'ABIERTO'}">
+                                        <span class="leading-relaxed whitespace-nowrap">{{element.estado}}</span>
+                                    </span>
+                                 </td>
+                </ng-container>
                 <ng-container matColumnDef="fecha">
                     <th
                         mat-header-cell

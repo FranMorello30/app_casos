@@ -1,3 +1,5 @@
+import { Rol } from "@shared/models/usuario.model";
+
 export interface LoginResponse {
     username:      string;
     nombre:        string;
@@ -6,7 +8,7 @@ export interface LoginResponse {
     correo:        string;
     cargo:         string;
     dependencia:   string;
-    rol:           string;
+    rol:           Rol;
     token:         string;
 }
 

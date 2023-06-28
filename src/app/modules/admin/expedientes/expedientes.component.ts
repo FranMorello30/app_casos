@@ -35,6 +35,7 @@ import { Organizacion } from './components/organizaciones/models/organizaciones.
 import { UserService } from '@core/user/user.service';
 import { Usuario } from '@shared/models/usuario.model';
 import { Imagen } from '@shared/models/imagen.model';
+import { Expediente } from './models/expediente.model';
 
 export const MY_DATE_FORMATS = {
     parse: {
@@ -87,11 +88,13 @@ export class ExpedientesComponent implements OnInit {
     public tablaPersonas: Persona[] = [];
     public tablaVehiculos: Vehiculo[] = [];
     public tablaInmuebles: Inmueble[] = [];
-    public tablaArmentos: any[] = [];
+    public tablaArmentos: Armamento[] = [];
     public tablaOrganizaciones: Organizacion[] = [];
     public buscar: string;
     public usuario: Usuario;
+    public expediente: Expediente;
 
+    public piezasExpediente = ['Apertura', 'Allanamiento', 'Resultas', 'Deligencias']
     public columnsVehiculos: string[] = [
         'placa',
         'tipo',
@@ -169,6 +172,7 @@ export class ExpedientesComponent implements OnInit {
     private llenarFormulario(){
         this._expedienteService.retornarExpediente(this.idExpendiente).subscribe(expediente =>{
             console.log(expediente);
+            this.expediente = expediente;
             this.archivosSubidos = expediente.imagenes ? expediente.imagenes : [];
             this.formularioExpe.patchValue({
                 delito: expediente.delito,
