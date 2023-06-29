@@ -13,10 +13,15 @@ export class ExpedientesService {
     private readonly baseUrl = environment.baseUrl;
     constructor(private readonly _http: HttpClient) {}
 
-    crearExpediente(formulario): Observable<any> {
+    actualizarExpediente(id: string,formulario): Observable<Expediente> {
         return this._http
-            .post(`${this.baseUrl}/expedientes`, { ...formulario })
-            .pipe(map((respuesta) => respuesta));
+            .patch<ExpedienteResponse>(`${this.baseUrl}/expedientes/${id}`, { ...formulario })
+            .pipe(map((respuesta) => respuesta.expediente));
+    }
+    crearExpediente(formulario): Observable<Expediente> {
+        return this._http
+            .post<ExpedienteResponse>(`${this.baseUrl}/expedientes`, { ...formulario })
+            .pipe(map((respuesta) => respuesta.expediente));
     }
     retornarExpediente(expediente: string): Observable<Expediente> {
         return this._http

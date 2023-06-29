@@ -445,13 +445,24 @@ export class ExpedientesComponent implements OnInit {
                         id_organizaciones:cadenaBandas
 
                 };
-                console.log(operacion);
-                this._expedienteService
-                .crearExpediente(operacion)
-                .subscribe((result) => {
-                    console.log(result)
-                });
-            } else {
+
+
+
+                if(this.idExpendiente){
+                    this._expedienteService
+                    .actualizarExpediente(this.idExpendiente,operacion)
+                    .subscribe((result) => {
+                        console.log(result)
+                    });
+                }else{
+                    this._expedienteService
+                    .crearExpediente(operacion)
+                    .subscribe((result) => {
+                        console.log(result)
+                    });
+                }
+
+
             }
         });
     }

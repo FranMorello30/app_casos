@@ -241,20 +241,28 @@ export class TablaPersonasComponent implements OnInit {
                 if(this._data.persona){
                     this._personasService
                     .actualizarPersona(this._data.persona,this.formulario.value)
-                    .subscribe((result) => {
-
-                        if(this._data.origen === 'crud'){
-                            this.matDialogRef.close();
+                    .subscribe({
+                        next : (result) => {
+                            if(this._data.origen === 'crud'){
+                                this.matDialogRef.close();
+                                Swal.fire({
+                                    title: 'Registro actualizado correctamente',
+                                    icon: 'success',
+                                })
+                            }else{
+                                this.seleccionar(result);
+                            }
+                        },
+                        error: (err) => {
+                            console.warn(err);
                             Swal.fire({
-                                title: 'Registro actualizado correctamente',
-                                icon: 'success',
-                            })
-                        }else{
-                            this.seleccionar(result);
-                        }
-
-
+                                icon: "warning",
+                                title: err.error.message,
+                                allowOutsideClick: false,
+                            });
+                        },
                     });
+
                 }else{
                     this._personasService
                     .crearPersona(this.formulario.value)

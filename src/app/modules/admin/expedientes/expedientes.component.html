@@ -29,7 +29,7 @@
                         >
                     </div>
                 </div>
-                <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                <div   *ngIf="!expediente" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
                     <!-- <button
                         class="ml-4 bg-black text-white"
@@ -39,6 +39,7 @@
                         <span class="ml-2 mr-1 "></span>
                     </button> -->
                     <upload-archivo
+
                         class="ml-2 mr-1 "
                         [titulo]="'Subir Adjuntos Expediente'"
                         (files)="recibirArchivo($event)"

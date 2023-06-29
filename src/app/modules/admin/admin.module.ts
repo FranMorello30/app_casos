@@ -14,7 +14,8 @@ const rutas: Route[] = [
         children:[
             {path: 'expediente', loadChildren: () => import('app/modules/admin/expedientes/expedientes.module').then(m => m.ExpedientesModule)},
             {path: 'busqueda', loadChildren: () => import('app/modules/admin/busqueda/busqueda.module').then(m => m.BusquedaModule)},
-            {path: 'configuracion', loadChildren: () => import('app/modules/admin/configuracion/configuracion.module').then(m => m.ConfiguracionModule)}
+            {path: 'configuracion', loadChildren: () => import('app/modules/admin/configuracion/configuracion.module').then(m => m.ConfiguracionModule)},
+            {path: 'dashboards', loadChildren: () => import('app/modules/admin/dashboards/dashboards.module').then(m => m.DashboardsModule)}
         ]
     },
 ];

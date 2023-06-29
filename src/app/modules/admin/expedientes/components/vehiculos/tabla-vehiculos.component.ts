@@ -294,6 +294,7 @@ export class TablaVehiculosComponent implements OnInit {
                     .crearVehiculo(this.formulario.value)
                     .subscribe({
                         next : (result) => {
+                            console.log(result)
                             this.seleccionar(result);
                         },
                         error: (err) => {

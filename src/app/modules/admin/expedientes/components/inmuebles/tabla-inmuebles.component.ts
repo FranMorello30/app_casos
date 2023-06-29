@@ -45,7 +45,6 @@ export class TablaInmueblesComponent implements OnInit {
         'propietario',
         'estado',
         'municipio',
-        'direccion',
         'telefono',
         'acciones'
     ];

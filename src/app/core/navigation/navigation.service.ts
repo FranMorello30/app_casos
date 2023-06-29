@@ -91,6 +91,14 @@ export class NavigationService
                     icon: 'mat_solid:settings',
                     link: '/admin/configuracion',
                 },
+                {
+                    id: 'dashboards',
+                    title: 'Dashboards',
+                    tooltip : 'Dashboards',
+                    type    : 'basic',
+                    icon: 'mat_solid:dashboard',
+                    link: '/admin/dashboards',
+                },
             ]
         }
 
