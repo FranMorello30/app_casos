@@ -16,7 +16,8 @@
             [queryParamsHandling]="item.queryParamsHandling ?? null"
             [routerLinkActive]="'fuse-vertical-navigation-item-active'"
             [routerLinkActiveOptions]="isActiveMatchOptions"
-            [matTooltip]="item.tooltip || ''">
+            [matTooltip]="item.tooltip || ''"
+            matTooltipPosition="after">
             <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
         </a>
     </ng-container>
