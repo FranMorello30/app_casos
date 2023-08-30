@@ -196,7 +196,7 @@ export class TablaVehiculosComponent implements OnInit {
             marca: ['', [Validators.required]],
             anio: [0, [Validators.required]],
             observaciones: [''],
-            estado:[''],
+            estado:['',[Validators.required]],
             custodia:[''],
             localizacion:[],
             imagenes: [[]],

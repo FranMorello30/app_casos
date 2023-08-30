@@ -22,7 +22,7 @@ const rutas: Route[] = [
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,    
   ],
   imports: [
     CommonModule,

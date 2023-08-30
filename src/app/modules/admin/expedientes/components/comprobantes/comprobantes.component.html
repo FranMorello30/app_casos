@@ -1,0 +1,84 @@
+
+    <div #dataToExport>
+        <table >
+            <tr >
+                <th>
+                    Nro:
+                </th>
+                <th>
+                    1
+                </th>
+                <th>
+                    Dirección:
+                </th>
+                <th colspan="3">
+                    su casa
+                </th>
+            </tr>
+            <tr>
+                <td rowspan="3" colspan="2" class="bg-red-600">
+                    imagen
+                </td>
+                <th>Estado:</th>
+                <td>Carabobo</td>
+                <th>Mp:</th>
+                <td>Principal</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="bg-blue-600">
+                    caso: fdfdfdf
+                </td>
+            </tr>
+            <tr>
+                <th >
+                    causa:
+                </th>
+                <td colspan="3">
+                    sddfdfd
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td rowspan="8" colspan="2" class="bg-red-600 w-5">
+                    imagen 2
+                </td>
+            </tr>
+            <tr>
+                <th>Incautado por el ONCDOFT:</th> <td>
+                    ffff
+                </td>
+            </tr>
+            <tr>
+                <th>Nº de Acta de Incautación:</th><td>..</td>
+            </tr>
+           <tr>
+            <td colspan="2">Decomisado, confiscado, disposición actual:    </td>
+           </tr>
+
+           <tr>
+                <th>A quien se le asigno:</th>
+                <td>.</td>
+           </tr>
+           <tr>
+            <th>Jefe de Investigación:</th>
+            <td>.</td>
+        </tr>
+        <tr>
+            <th>Estatus de Fiscalía: </th>
+            <td>.</td>
+        </tr>
+        <tr>
+            <th>Estatus de Tribunales:</th>
+            <td>..</td>
+        </tr>
+        <tr>
+            <th>A quien le fue asignado por la ONCDOFT2   </th>
+            <td colspan="3">.</td>
+        </tr>
+        </table>
+    </div>
+
+    <button class="btn btn-primary" (click)="downloadAsPdf()">Export To PDF</button>
+
+

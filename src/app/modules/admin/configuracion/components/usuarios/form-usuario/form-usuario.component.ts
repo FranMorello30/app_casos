@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { ConfiguracionService } from '../../services/configuracion.service';
+import { ConfiguracionService } from '../../../services/configuracion.service';
 
 @Component({
     selector: 'app-form-usuario',
@@ -54,6 +54,7 @@ export class FormUsuarioComponent implements OnInit {
             cargo: ['',[Validators.required]],
             dependencia: ['',[Validators.required]],
             rol: ['',[Validators.required]],
+            nro_id: ['',[Validators.required]],
         });
     }
     public grabar() {

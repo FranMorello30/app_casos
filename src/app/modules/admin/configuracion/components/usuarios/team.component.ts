@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormUsuarioComponent } from './form-usuario/form-usuario.component';
-import { ConfiguracionService } from '../services/configuracion.service';
-import { User } from '../models/users';
+import { ConfiguracionService } from '../../services/configuracion.service';
+import { User } from '../../models/users';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({

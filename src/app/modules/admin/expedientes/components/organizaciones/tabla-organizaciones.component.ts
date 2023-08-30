@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+    UntypedFormBuilder,
+    UntypedFormGroup,
+    Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -101,7 +105,7 @@ export class TablaOrganizacionesComponent implements OnInit {
             nombre: ['', [Validators.required]],
             tipo: ['', [Validators.required]],
             observaciones: [''],
-            nro_doc: ['', [Validators.required]],
+            nro_doc: [''],
             telefono: [''],
             imagenes: [[]],
             currentImageIndex: [0],
@@ -122,7 +126,9 @@ export class TablaOrganizacionesComponent implements OnInit {
                         ? organizacion.imagenes
                         : [],
                 });
-                this.archivosSubidos = organizacion.imagenes ? organizacion.imagenes : [];
+                this.archivosSubidos = organizacion.imagenes
+                    ? organizacion.imagenes
+                    : [];
             });
     }
     public grabar() {
@@ -186,23 +192,24 @@ export class TablaOrganizacionesComponent implements OnInit {
         console.log(this.formulario.get('currentImageIndex').value);
     }
     public recibirArchivo(archivos: string[]) {
-        if(this._data.organizacion){
-            if(this.archivosSubidos.length === 0){
+        if (this._data.organizacion) {
+            if (this.archivosSubidos.length === 0) {
                 this.archivosSubidos = archivos;
-            }else{
-                archivos.forEach((img)=>{
-                    const existe = this.archivosSubidos.filter(p => p === img)
-                    if(existe.length === 0)
-                        this.archivosSubidos.push(img)
-                })
+            } else {
+                archivos.forEach((img) => {
+                    const existe = this.archivosSubidos.filter(
+                        (p) => p === img
+                    );
+                    if (existe.length === 0) this.archivosSubidos.push(img);
+                });
             }
-        }else{
+        } else {
             this.archivosSubidos = archivos;
         }
 
         this.formulario.patchValue({
-            imagenes: this.archivosSubidos
-        })
+            imagenes: this.archivosSubidos,
+        });
     }
     public busquedaTabla(): void {
         this.tabla.filter = this.buscar.trim().toLowerCase();

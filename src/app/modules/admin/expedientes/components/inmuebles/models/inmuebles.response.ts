@@ -10,6 +10,7 @@ export interface Inmueble {
     propietario: string;
     telefono: string;
     estado: string;
+    id_estado: number;
     municipio: string;
     fecha_compra: string;
     fecha: Date;

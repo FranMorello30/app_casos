@@ -17,9 +17,9 @@ import { AuthService } from '@core/auth/auth.service';
     providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
-    constructor(private _authService: AuthService,private _router: Router) {}
+    constructor(private _authService: AuthService, private _router: Router) {}
     get token(): string {
-        return localStorage.getItem('accessToken') || '';
+        return sessionStorage.getItem('accessToken') || '';
     }
 
     intercept(
@@ -33,20 +33,20 @@ export class InterceptorService implements HttpInterceptor {
         }
 
         const headers = new HttpHeaders({
-            'Authorization': `Bearer ${this._authService.accessToken}`,
+            Authorization: `Bearer ${this._authService.accessToken}`,
         });
 
-
         if (this._authService.accessToken) {
-            newReq = req.clone({headers});
+            newReq = req.clone({ headers });
         }
 
         return next.handle(newReq).pipe(
             catchError((error) => {
-
                 // Catch "401 Unauthorized" responses
-                if ( error instanceof HttpErrorResponse && error.status === 401 )
-                {
+                if (
+                    error instanceof HttpErrorResponse &&
+                    error.status === 401
+                ) {
                     // Sign out
                     this._authService.signOut();
 
@@ -58,5 +58,4 @@ export class InterceptorService implements HttpInterceptor {
             })
         );
     }
-
 }

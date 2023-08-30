@@ -18,6 +18,8 @@ import { UserService } from '@core/user/user.service';
 import { Usuario } from '@shared/models/usuario.model';
 import { DefinicionesService } from '@shared/services/definiciones.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Estado, Municipio } from './models/estados.response';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-tabla-inmuebles',
@@ -61,31 +63,33 @@ export class TablaInmueblesComponent implements OnInit {
         'Clinica',
         'Empresa',
     ];
-    public estados = [
-        "Amazonas",
-        "Anzoátegui",
-        "Apure",
-        "Aragua",
-        "Barinas",
-        "Bolívar",
-        "Carabobo",
-        "Cojedes",
-        "Delta Amacuro",
-        "Falcón",
-        "Guárico",
-        "Lara",
-        "Mérida",
-        "Miranda",
-        "Monagas",
-        "Nueva Esparta",
-        "Portuguesa",
-        "Sucre",
-        "Táchira",
-        "Trujillo",
-        "Vargas",
-        "Yaracuy",
-        "Zulia",
-    ];
+    public estados: Estado[] = [];
+    public municipios: Municipio[] = [];
+    // public estados = [
+    //     "Amazonas",
+    //     "Anzoátegui",
+    //     "Apure",
+    //     "Aragua",
+    //     "Barinas",
+    //     "Bolívar",
+    //     "Carabobo",
+    //     "Cojedes",
+    //     "Delta Amacuro",
+    //     "Falcón",
+    //     "Guárico",
+    //     "Lara",
+    //     "Mérida",
+    //     "Miranda",
+    //     "Monagas",
+    //     "Nueva Esparta",
+    //     "Portuguesa",
+    //     "Sucre",
+    //     "Táchira",
+    //     "Trujillo",
+    //     "Vargas",
+    //     "Yaracuy",
+    //     "Zulia",
+    // ];
     public listaEstado = ['Asegurado', 'No Asegurado'];
     public archivosSubidos: string[]= [];
     private dataExport = [];
@@ -110,17 +114,22 @@ export class TablaInmueblesComponent implements OnInit {
         this.usuarioService.user$.subscribe(usuario =>{
             this.usuario = usuario;
         })
+
+        this._inmueblesService.retornarEstados().subscribe(resp =>{
+            this.estados = resp;
+        })
     }
     private crearFormulario(): void {
         this.formulario = this._formBuilder.group({
             direccion: ['', [Validators.required]],
             propietario: [''],
             telefono: [''],
+            id_estado: ['', [Validators.required]],
             estado: ['', [Validators.required]],
             municipio: ['', [Validators.required]],
             fecha_compra: ['', [Validators.required]],
             tipo:'',
-            estatus:'',
+            estatus:['', [Validators.required]],
             nro:'',
             imagenes: [[]],
             currentImageIndex: [0],
@@ -138,6 +147,7 @@ export class TablaInmueblesComponent implements OnInit {
                     estatus:inmueble.estatus,
                     propietario: inmueble.propietario,
                     telefono: inmueble.telefono,
+                    id_estado: inmueble.id_estado,
                     estado: inmueble.estado,
                     fecha_compra: inmueble.fecha_compra,
                     tipo:inmueble.tipo,
@@ -145,11 +155,11 @@ export class TablaInmueblesComponent implements OnInit {
                     imagenes: inmueble.imagenes ? inmueble.imagenes : [],
                 });
                 this.archivosSubidos = inmueble.imagenes ? inmueble.imagenes : [];
+                this.selectEstado({value:inmueble.id_estado});
             });
     }
     private retornarInmuebles() {
         this._inmueblesService.retornarInmuebles().subscribe((inmuebles) => {
-            console.log(inmuebles)
             this.tabla = new MatTableDataSource(inmuebles);
             this.tabla.paginator = this.paginator;
             this.tabla.sort = this.sort;
@@ -292,5 +302,14 @@ export class TablaInmueblesComponent implements OnInit {
     public cambiarTab(tabChangeEvent: MatTabChangeEvent): void {
         this.tabIndice = tabChangeEvent.index;
         this.tabActual = tabChangeEvent.tab.textLabel;
+    }
+    public selectEstado(seleccion: any){
+
+       //const edo = this.estados.filter( estado => estado.id_estado == seleccion.value)
+        const edo = this.estados.find( estado => estado.id_estado == seleccion.value)
+        this.formulario.patchValue({
+            estado: edo.nombre
+        })
+        this.municipios = edo.municipios;
     }
 }

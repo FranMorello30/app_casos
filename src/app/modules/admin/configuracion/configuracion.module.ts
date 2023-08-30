@@ -6,8 +6,11 @@ import { SharedModule } from '@shared/shared.module';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SettingsTeamComponent } from './team/team.component';
-import { FormUsuarioComponent } from './team/form-usuario/form-usuario.component';
+
+import { FormUsuarioComponent } from './components/usuarios/form-usuario/form-usuario.component';
+import { SettingsTeamComponent } from './components/usuarios/team.component';
+import { CierreComponent } from './components/cierre/cierre.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 const rutas: Route[] = [
     {
@@ -17,13 +20,19 @@ const rutas: Route[] = [
 ];
 
 @NgModule({
-    declarations: [ConfiguracionComponent, SettingsTeamComponent, FormUsuarioComponent],
+    declarations: [
+        ConfiguracionComponent,
+        SettingsTeamComponent,
+        CierreComponent,
+        FormUsuarioComponent,
+    ],
     imports: [
         CommonModule,
         SharedModule,
         MatSidenavModule,
         MatSlideToggleModule,
         RouterModule.forChild(rutas),
+        NgApexchartsModule
     ],
     exports: [RouterModule],
 })

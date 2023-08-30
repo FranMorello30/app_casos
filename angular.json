@@ -55,7 +55,9 @@
                             "core-js/modules/es.string.trim.js",
                             "core-js/modules/web.dom-collections.iterator.js",
                             "raf",
-                            "rgbcolor"
+                            "rgbcolor",
+                            "dom-to-image",
+                            "html2pdf.js"
                         ],
                         "assets": [
                             "src/favicon-16x16.png",

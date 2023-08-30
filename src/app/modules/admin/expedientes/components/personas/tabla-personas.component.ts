@@ -69,7 +69,7 @@ export class TablaPersonasComponent implements OnInit {
         "Snapchat",
         "Discord",
     ];
-    tiposDoc = ['CI', 'PASAPORTE', 'RIF', 'NIT'];
+    tiposDoc = ['CI', 'PASAPORTE', 'RIF', 'NIT', 'N/A'];
     constructor(
         @Inject(MAT_DIALOG_DATA)
         private _data: { persona: string; origen: string },
@@ -111,7 +111,6 @@ export class TablaPersonasComponent implements OnInit {
             fec_nacimiento: ['', [Validators.required]],
             alias: [''],
             direccion: ['', [Validators.required]],
-            direccion_secundaria: ['.'],
             telefono: ['', [Validators.required]],
             correo: [''],
             nacionalidad: ['', [Validators.required]],
@@ -119,6 +118,9 @@ export class TablaPersonasComponent implements OnInit {
             direccion_trabajo: [''],
             url: [''],
             provide: [''],
+            centro_reclusion: [{value: '', disabled:true}],
+            estado: ['EN LIBERTAD' , [Validators.required]],
+            delitos: [''],
             redes_sociales:[[]],
             imagenes: [[]],
             currentImageIndex: [0],
@@ -146,6 +148,9 @@ export class TablaPersonasComponent implements OnInit {
                 direccion_trabajo:persona.direccion_trabajo,
                 observaciones:persona.observaciones,
                 imagenes:(persona.imagenes) ? persona.imagenes: [],
+                centro_reclusion:persona.centro_reclusion,
+                estado:persona.estado,
+                delitos:persona.delitos
             })
             this.redesSociales = persona.redes_sociales;
             this.archivosSubidos = (persona.imagenes) ? persona.imagenes: [];
@@ -189,6 +194,7 @@ export class TablaPersonasComponent implements OnInit {
     public cerrarVentana() {
         this.matDialogRef.close();
     }
+
     public cycleImages(forward: boolean = true): void {
         // Get the image count and current image index
         const count = this.formulario.get('imagenes').value.length;
@@ -347,5 +353,38 @@ export class TablaPersonasComponent implements OnInit {
     public cambiarTab(tabChangeEvent: MatTabChangeEvent): void {
         this.tabIndice = tabChangeEvent.index;
         this.tabActual = tabChangeEvent.tab.textLabel;
+    }
+    public tipoDoc({value}){
+        //console.log(value)
+        if(value === 'N/A'){
+            //this.formulario.get('num_doc').disable()
+            this.formulario.get('num_doc').setValue('--')
+        }else{
+            //this.formulario.get('num_doc').enable()
+            this.formulario.get('num_doc').setValue('')
+        }
+    }
+    public edoPersona({value}){
+    console.log(value)
+        if(value === 'EN LIBERTAD'){
+            this.formulario.get('centro_reclusion').disable()
+            this.formulario.get('centro_reclusion').setValue('')
+        }else{
+           this.formulario.get('centro_reclusion').enable()
+           this.formulario.get('centro_reclusion').setValue('')
+        }
+        this._inicializarValidacion();
+    }
+    private _inicializarValidacion(): void {
+
+        if(this.formulario.get('estado').value === 'PRIVADO DE LIBERTAD'){
+            this.formulario
+                .get("centro_reclusion")
+                .setValidators([Validators.required]);
+            this.formulario.get("centro_reclusion").updateValueAndValidity();
+        }else{
+            this.formulario.get("centro_reclusion").clearValidators();
+            this.formulario.get("centro_reclusion").updateValueAndValidity();
+        }
     }
 }

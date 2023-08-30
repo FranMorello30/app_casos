@@ -121,10 +121,10 @@ export class NavigationService
     {
 
             const menu = this.menu[this._user.rol];
-            console.log(menu);
+            //console.log(menu);
 
             const menuApp = this.moldearMenu(menu.menu);
-        console.log(menuApp)
+        //console.log(menuApp)
         this._navigation.next(menuApp);
            return of(menuApp);
 

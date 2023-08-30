@@ -1,0 +1,117 @@
+<div class="p-2">
+
+    <div
+        class="flex flex-0 items-center justify-between"
+    >
+        <div>
+            <button
+                mat-flat-button
+                class="bg-black text-white"
+                (click)="downloadAsPdf()"
+            >
+                Imprimir
+            </button>
+        </div>
+        <button mat-icon-button (click)="cerrarVista()" class="float-right">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"
+            ></mat-icon>
+        </button>
+    </div>
+
+    <!-- Invoice -->
+    <div id="dataToExport" #dataToExport class="w-auto p-2 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent">
+
+        <div class="flex items-start h-24">
+            <div class="grid grid-rows-2 place-items-start gap-y-12">
+                <div class="grid auto-cols-max grid-flow-col gap-x-8">
+                    <div class="place-self-center w-24">
+                        <img
+                            class="w-24"
+                            src="assets/images/logo/dg-sin-fondo.png">
+                    </div>
+                </div>
+
+            </div>
+            <div class="grid grid-cols-1 gap-x-4 gap-y-1 ml-auto">
+                <div class="justify-self-end text-4xl tracking-tight text-secondary">Organización</div>
+                <!-- <div class="justify-self-end font-medium tracking-tight text-secondary">Caso</div> -->
+                <!-- <div class="font-bold">{{expediente.nro}}</div> -->
+
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-x-1 mt-1 ">
+
+
+            <div class="col-span-4">
+                <div class="text-md font-bold">Tipo</div>
+                <div class="mt-2 text-md text-secondary">
+                    {{organizacion.tipo}}
+                </div>
+            </div>
+            <div class="col-span-4">
+                <div class="text-md font-bold">Nombre o Designación</div>
+                <div class="mt-2 text-md text-secondary">
+                    {{organizacion.nombre}}
+                </div>
+            </div>
+            <div class="col-span-4">
+                <div class="text-md font-bold">Lider o Propietario</div>
+                <div class="mt-2 text-md text-secondary">
+                    {{organizacion.propietario}}
+                </div>
+            </div>
+
+
+
+            <!-- Divider -->
+            <div class="col-span-12 my-4 border-b"></div>
+
+            <div class="col-span-6">
+                <div class="flex h-50 r">
+                    <img
+                        *ngIf="organizacion?.imagenes[0]"
+                        class="rounded object-cover "
+                        [src]="organizacion?.imagenes[0] | imagen"
+                        alt="Card cover image">
+
+                    <img
+                        *ngIf="!organizacion?.imagenes[0]"
+                        class="rounded object-cover "
+                        src="assets/images/fondos/no_imagen.png"
+                        alt="Card cover image">
+
+                </div>
+            </div>
+
+
+
+            <div class="col-span-6 grid grid-cols-12">
+                <div class="col-span-6 pl-1">
+                    <div class="text-md font-bold">Nro Id</div>
+                    <div class="mt-2 text-md text-secondary">
+                        {{organizacion.nro_doc}}
+                    </div>
+                </div>
+                <div class="col-span-6 pl-1">
+                    <div class="text-md font-bold">Telefono</div>
+                    <div class="mt-2 text-md text-secondary">
+                        {{organizacion.telefono}}
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+

@@ -20,17 +20,24 @@ export class ConfiguracionService {
 
     crearUsuario(formulario): Observable<User[]> {
         return this._http
-            .post<UsersResponse>(`${this.baseUrl}/auth/users`, {...formulario})
+            .post<UsersResponse>(`${this.baseUrl}/auth/users`, {
+                ...formulario,
+            })
             .pipe(map((respuesta) => respuesta.users));
     }
     cambiarRolUsuario(id: string, rol: string): Observable<User[]> {
         return this._http
-            .patch<UsersResponse>(`${this.baseUrl}/auth/users/${id}`, {rol})
+            .patch<UsersResponse>(`${this.baseUrl}/auth/users/${id}`, { rol })
             .pipe(map((respuesta) => respuesta.users));
     }
     borrarUsuario(id: string): Observable<User[]> {
         return this._http
             .delete<UsersResponse>(`${this.baseUrl}/auth/users/${id}`)
             .pipe(map((respuesta) => respuesta.users));
+    }
+    cierreSistema(): Observable<string> {
+        return this._http
+            .get<any>(`${this.baseUrl}/definiciones/cierre`)
+            .pipe(map((respuesta) => respuesta.message));
     }
 }

@@ -1,0 +1,215 @@
+<!-- <div
+    class="absolute inset-0 min-w-0 text-center overflow-auto print:overflow-visible"
+    cdkScrollable> -->
+
+    <!-- Main -->
+
+    <div class="p-2">
+
+
+        <div
+            class="flex flex-0 items-center justify-between"
+        >
+            <div>
+                <button
+                    mat-flat-button
+                    class="bg-black text-white"
+                    (click)="downloadAsPdf()"
+                >
+                    Imprimir
+                </button>
+            </div>
+            <button mat-icon-button (click)="cerrarVista()" class="float-right">
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="'heroicons_outline:x'"
+                ></mat-icon>
+            </button>
+        </div>
+
+        <div class="ml-auto mr-0" >
+
+
+        </div>
+        <!-- Invoice -->
+        <div id="dataToExport" #dataToExport class="w-auto p-2 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent">
+
+            <div class="flex items-start h-24">
+                <div class="grid grid-rows-2 place-items-start gap-y-12">
+                    <div class="grid auto-cols-max grid-flow-col gap-x-8">
+                        <div class="place-self-center w-24">
+                            <img
+                                class="w-24"
+                                src="assets/images/logo/dg-sin-fondo.png">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="grid grid-cols-1 gap-x-4 gap-y-1 ml-auto">
+                    <div class="justify-self-end text-4xl tracking-tight text-secondary">Inmueble</div>
+                    <!-- <div class="justify-self-end font-medium tracking-tight text-secondary">Caso</div> -->
+                    <!-- <div class="font-bold">{{expediente.nro}}</div> -->
+
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-x-1 mt-1 ">
+
+
+                <!-- Item -->
+                <div class="col-span-8">
+                    <div class="text-md font-bold">Dirección</div>
+                    <div class="mt-2 text-md text-secondary">
+                        {{inmueble.direccion}}
+                    </div>
+                </div>
+                <div class="col-span-4 self-center text-right pt-0">
+                    <span class="font-bold">Nro: </span> {{inmueble.nro}}
+                </div>
+
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <div class="col-span-6">
+                    <div class="flex h-50 ">
+                        <img
+                            *ngIf="inmueble?.imagenes[0]"
+                            class="rounded object-cover "
+                            [src]="inmueble?.imagenes[0] | imagen"
+                            alt="Card cover image">
+
+                            <img
+                            *ngIf="!inmueble?.imagenes[0]"
+                            class="rounded object-cover "
+                            src="assets/images/fondos/no_imagen.png"
+                            alt="Card cover image">
+                    </div>
+                </div>
+
+
+                <div class="col-span-6 grid grid-cols-12">
+                    <div class="col-span-6 pl-1">
+                        <div class="text-md font-bold">Tipo</div>
+                        <div class="mt-2 text-md text-secondary">
+                            {{inmueble.tipo}}
+                        </div>
+                    </div>
+                    <div class="col-span-6 pl-1">
+                        <div class="text-md font-bold">Propietario</div>
+                        <div class="mt-2 text-md text-secondary">
+                            {{inmueble.propietario}}
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 pl-1">
+                        <div class="text-md font-bold">Estado:</div>
+                        <div class="mt-2 text-md text-secondary">
+                            {{inmueble.estado}}
+                        </div>
+                    </div>
+                    <div class="col-span-6 pl-1">
+                        <div class="text-md font-bold">Municipio:</div>
+                        <div class="mt-2 text-md text-secondary">
+                            {{inmueble.municipio}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="col-span-6 pl-1">
+                    <div class="text-md font-bold">Causa</div>
+                    <div class="mt-2 text-md text-secondary">
+                        {{expediente.delito}}
+                    </div>
+                </div> -->
+                <!-- <div class="self-center text-right">$60.50</div>
+                <div class="self-center text-right">350</div>
+                <div class="col-span-2 self-center text-right">$21,175.00</div> -->
+
+
+                <!-- <div class="col-span-12 my-4 border-b"></div> -->
+
+
+                <!-- <div class="col-span-6">
+                    <div class="flex h-40 pt-1 border">
+                        <img
+                            class="rounded object-cover "
+                            src="assets/images/fondos/no_imagen.png"
+                            alt="Card cover image">
+                    </div>
+                </div> -->
+
+
+
+                <!-- <div class="col-span-4">
+                    <div class="text-md font-bold">Incautado x ONCDOFT</div>
+                    <div class="mt-2 text-md text-secondary">
+                        sdksdmksmdks
+                    </div>
+                </div>
+                <div class="col-span-4">
+                    <div class="text-md font-bold">Nº Acta de Incautación</div>
+                    <div class="mt-2 text-md text-secondary">
+                        #425841
+                    </div>
+                </div>
+                 <div class="col-span-4 ">
+                    <div class="text-md font-bold">Disposición actual</div>
+                    <div class="mt-2 text-md text-secondary">
+                        dfjhdfjhdjfhdjfhjdhfjdhfjd
+                    </div>
+                 </div> -->
+
+
+
+
+                <!-- <div class="col-span-12 my-4 border-b"></div>
+
+                <div class="col-span-4">
+                    <div class="text-md font-bold">Estatus de Fiscalía</div>
+                    <div class="mt-2 text-md text-secondary">
+                        Procesado
+                    </div>
+                </div>
+                <div class="col-span-4">
+                    <div class="text-md font-bold">Estatus de Tribunales</div>
+                    <div class="mt-2 text-md text-secondary">
+                        Pendiente
+                    </div>
+                </div>
+
+                <div class="col-span-4">
+                    <div class="text-md font-bold">Jefe de Investigación</div>
+                    <div class="mt-2 text-md text-secondary">
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-span-12 my-4 border-b"></div>
+                <div class="col-span-6">
+                    <div class="text-md font-bold">Asignado a</div>
+                    <div class="mt-2 text-md text-secondary">
+
+                    </div>
+                </div>
+                <div class="col-span-6">
+                    <div class="text-md font-bold">Asignado x ONCDOFT2</div>
+                    <div class="mt-2 text-md text-secondary">
+
+                    </div>
+                </div> -->
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+

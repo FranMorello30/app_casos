@@ -1,4 +1,4 @@
-<input class="d-none" (change)="capturarFile($event)" type="file" #fileInput accept=".jpg,.jpeg,.gif,.png,.jfif," />
+<input class="d-none" (change)="capturarFile($event)" type="file" #fileInput accept="image/jpeg,image/jpg,image/gif,image/png,application/pdf"  />
 
 <button type="button" mat-flat-button (click)="fileInput.click()" matTooltip="Seleccionar y subir archivo" [disabled]="subiendo">
     <mat-icon [svgIcon]="'heroicons_solid:paper-clip'"></mat-icon>
@@ -6,7 +6,7 @@
 </button>
 
 <mat-progress-bar mode="indeterminate" *ngIf="subiendo" ></mat-progress-bar>
-<!-- 
+<!--
 <div class="attachment-list">
     <div
         *ngFor="let adjunto of archivosSubidos"

@@ -32,13 +32,13 @@ export class ConfiguracionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.panels = [
-            // {
-            //     id: 'account',
-            //     icon: 'heroicons_outline:user-circle',
-            //     title: 'Account',
-            //     description:
-            //         'Manage your public profile and private information',
-            // },           
+            {
+                id: 'cierre',
+                icon: 'heroicons_outline:lock-closed',
+                title: 'Cierre',
+                description:
+                    'Realiza el cierre y cambio de año del sistema',
+            },
             {
                 id: 'usuarios',
                 icon: 'heroicons_outline:user-group',

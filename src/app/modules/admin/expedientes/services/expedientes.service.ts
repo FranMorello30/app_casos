@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { ExpedienteResponse, Expediente } from '../models/expediente.model';
+import { Mensaje } from '@shared/interfaces/mensaje';
 
 
 @Injectable({
@@ -13,10 +14,10 @@ export class ExpedientesService {
     private readonly baseUrl = environment.baseUrl;
     constructor(private readonly _http: HttpClient) {}
 
-    actualizarExpediente(id: string,formulario): Observable<Expediente> {
+    actualizarExpediente(id: string,formulario): Observable<string> {
         return this._http
-            .patch<ExpedienteResponse>(`${this.baseUrl}/expedientes/${id}`, { ...formulario })
-            .pipe(map((respuesta) => respuesta.expediente));
+            .patch<Mensaje>(`${this.baseUrl}/expedientes/${id}`, { ...formulario })
+            .pipe(map((respuesta) => respuesta.msg));
     }
     crearExpediente(formulario): Observable<Expediente> {
         return this._http

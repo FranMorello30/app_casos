@@ -23,6 +23,9 @@ export interface Persona {
     imagenes:             null;
     redes_sociales?:      null;
     nacionalidad:         string;
+    centro_reclusion:string;
+    estado:string;
+    delitos:string;
 }
 
 // export interface PersonaResponse {

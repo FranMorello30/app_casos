@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
@@ -6,7 +7,6 @@ import { environment } from 'environments/environment';
 
 //import { Usuario } from '@shared/models/usuario.model';
 import { LoginResponse } from './interfaces/login-response';
-
 
 const base_url = String(environment.baseUrl);
 
@@ -19,13 +19,12 @@ export class AuthService {
         private _userService: UserService
     ) {}
 
-
     set accessToken(token: string) {
-        localStorage.setItem('accessToken', token);
+        sessionStorage.setItem('accessToken', token);
     }
 
     get accessToken(): string {
-        const token = localStorage.getItem('accessToken') || '';
+        const token = sessionStorage.getItem('accessToken') || '';
 
         if (token.trim().length === 0) {
             this._authenticated = false;
@@ -48,17 +47,18 @@ export class AuthService {
         return token;
     }
 
-
     forgotPassword(email: string): Observable<any> {
         return this._httpClient.post('api/auth/forgot-password', email);
     }
-
 
     resetPassword(password: string): Observable<any> {
         return this._httpClient.post('api/auth/reset-password', password);
     }
 
-    signIn(credenciales : {username: string, password: string} ): Observable<any> {
+    signIn(credenciales: {
+        username: string;
+        password: string;
+    }): Observable<any> {
         // Throw error, if the user is already logged in
         if (this._authenticated) {
             return throwError('User is already logged in.');
@@ -67,7 +67,7 @@ export class AuthService {
         return this._httpClient
             .post(`${base_url}/auth/login`, {
                 username: credenciales.username,
-                password : credenciales.password
+                password: credenciales.password,
             })
             .pipe(
                 switchMap((response: any) => {
@@ -75,23 +75,22 @@ export class AuthService {
                     this.accessToken = token;
                     this._authenticated = true;
                     this._userService.user = {
-                        id:            response.id,
-                        username:      response.username,
-                        nombre:        response.nombre,
-                        apellido:      response.apellido,
-                        telefono:      response.telefono,
-                        correo:        response.correo,
-                        cargo:         response.cargo,
-                        dependencia:   response.dependencia,
-                        avatar:        response.avatar,
-                        rol:           response.rol,
-                        estado: ''
+                        id: response.id,
+                        username: response.username,
+                        nombre: response.nombre,
+                        apellido: response.apellido,
+                        telefono: response.telefono,
+                        correo: response.correo,
+                        cargo: response.cargo,
+                        dependencia: response.dependencia,
+                        avatar: response.avatar,
+                        rol: response.rol,
+                        estado: '',
                     };
                     return of(response);
                 })
             );
     }
-
 
     signInUsingToken(): Observable<any> {
         // Renew token
@@ -107,29 +106,28 @@ export class AuthService {
                 //this.accessToken = token;
                 this._authenticated = true;
                 this._userService.user = {
-                    id:            response.id,
-                    username:      response.username,
-                    nombre:        response.nombre,
-                    apellido:      response.apellido,
-                    telefono:      response.telefono,
-                    correo:        response.correo,
-                    cargo:         response.cargo,
-                    dependencia:   response.dependencia,
-                    avatar:        response.avatar,
-                    rol:           response.rol,
-                    estado: ''
+                    id: response.id,
+                    username: response.username,
+                    nombre: response.nombre,
+                    apellido: response.apellido,
+                    telefono: response.telefono,
+                    correo: response.correo,
+                    cargo: response.cargo,
+                    dependencia: response.dependencia,
+                    avatar: response.avatar,
+                    rol: response.rol,
+                    estado: '',
                 };
                 return of(response);
             })
         );
     }
 
-
     signOut(): Observable<any> {
         /*this._httpClient
             .patch(`${base_url}/auth/estado`, { estado: 'desconectado' })
             .subscribe((resp) => {*/
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('accessToken');
 
         // Set the authenticated flag to false
         this._authenticated = false;

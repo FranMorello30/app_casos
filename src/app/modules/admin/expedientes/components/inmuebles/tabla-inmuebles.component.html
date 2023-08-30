@@ -68,11 +68,11 @@
                                         class="p-1 altura-campo fuse-mat-dense"
                                         fxFlex
                                     >
-                                        <mat-label>Estado</mat-label>
+                                        <mat-label>Estado </mat-label>
 
-                                        <mat-select formControlName="estado">
-                                            <mat-option *ngFor="let estado of estados" [value]="estado">
-                                                {{estado}}
+                                        <mat-select formControlName="id_estado" (selectionChange)="selectEstado($event)">
+                                            <mat-option *ngFor="let estado of estados" [value]="estado.id_estado">
+                                                {{estado.nombre}}
                                             </mat-option>
                                         </mat-select>
 
@@ -82,10 +82,15 @@
                                         fxFlex
                                     >
                                         <mat-label>Municipio</mat-label>
-                                        <input
+                                        <!-- <input
                                             matInput
                                             formControlName="municipio"
-                                        />
+                                        /> -->
+                                        <mat-select formControlName="municipio">
+                                            <mat-option *ngFor="let municipio of municipios" [value]="municipio.nombre">
+                                                {{municipio.nombre}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div fxLayout="row">

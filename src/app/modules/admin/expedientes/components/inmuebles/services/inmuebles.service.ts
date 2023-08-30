@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { Inmueble, InmueblesResponse } from '../models/inmuebles.response';
+import { Estado, EstadosResponse } from '../models/estados.response';
 
 @Injectable({
     providedIn: 'root',
@@ -30,5 +31,10 @@ export class InmueblesService {
         return this._http
             .patch<InmueblesResponse>(`${this.baseUrl}/inmuebles/${id}`, { ...formulario })
             .pipe(map((respuesta) => respuesta.inmueble));
+    }
+    retornarEstados(): Observable<Estado[]> {
+        return this._http
+            .get<EstadosResponse>(`${this.baseUrl}/definiciones/estados`)
+            .pipe(map((respuesta) => respuesta.estados));
     }
 }

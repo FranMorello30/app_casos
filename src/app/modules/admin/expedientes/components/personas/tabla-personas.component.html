@@ -63,7 +63,7 @@
                                                 matInput
                                                 formControlName="num_doc"
                                             />
-                                            <mat-select formControlName="tipo_doc" floatlLabel="never" class="text-black"
+                                            <mat-select (selectionChange)="tipoDoc($event)" formControlName="tipo_doc" floatlLabel="never" class="text-black"
                                                 matPrefix>
                                                 <mat-option *ngFor="let tipo of tiposDoc" [value]="tipo" class="text-black">
                                                     {{tipo}}
@@ -184,7 +184,42 @@
                                             ></textarea>
                                         </mat-form-field>
                                     </div>
+                                    <div fxLayout="row">
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Estado</mat-label>
+                                            <mat-select formControlName="estado" (selectionChange)="edoPersona($event)">
+                                                <mat-option value="EN LIBERTAD">EN LIBERTAD</mat-option>
+                                                <mat-option value="PRIVADO DE LIBERTAD">PRIVADO DE LIBERTAD</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field
+                                            class="p-1 altura-campo fuse-mat-dense"
+                                            fxFlex
+                                        >
+                                            <mat-label>Centro Reclusión</mat-label>
+                                            <input
+                                                matInput
+                                                formControlName="centro_reclusion"
+                                            />
+                                        </mat-form-field>
+                                    </div>
                                     <div fxLayout="row" >
+                                        <mat-form-field
+                                            class="px-1 fuse-mat-dense "
+                                            fxFlex
+                                        >
+                                            <mat-label>Delitos</mat-label>
+                                            <textarea
+                                                cdkTextareaAutosize
+                                                cdkAutosizeMinRows="3"
+                                                cdkAutosizeMaxRows="3"
+                                                matInput
+                                                formControlName="delitos"
+                                            ></textarea>
+                                        </mat-form-field>
                                         <mat-form-field
                                             class="px-1 fuse-mat-dense "
                                             fxFlex
