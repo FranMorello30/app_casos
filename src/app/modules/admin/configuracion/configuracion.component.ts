@@ -9,7 +9,9 @@ import {
 } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
+import { Usuario } from '@shared/models/usuario.model';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from './models/users';
 
 @Component({
     selector: 'app-configuracion',
@@ -19,6 +21,9 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ConfiguracionComponent implements OnInit, OnDestroy {
     @ViewChild('drawer') drawer: MatDrawer;
+
+    @ViewChild('matDrawer', { static: true }) matDrawerUser: MatDrawer;
+
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     panels: any[] = [];
@@ -36,8 +41,7 @@ export class ConfiguracionComponent implements OnInit, OnDestroy {
                 id: 'cierre',
                 icon: 'heroicons_outline:lock-closed',
                 title: 'Cierre',
-                description:
-                    'Realiza el cierre y cambio de año del sistema',
+                description: 'Realiza el cierre y cambio de año del sistema',
             },
             {
                 id: 'usuarios',
@@ -80,6 +84,10 @@ export class ConfiguracionComponent implements OnInit, OnDestroy {
     getPanelInfo(id: string): any {
         return this.panels.find((panel) => panel.id === id);
     }
+
+    // historialUsuario(user: User): void {
+    //     this.matDrawerUser.open();
+    // }
 
     trackByFn(index: number, item: any): any {
         return item.id || index;

@@ -2,7 +2,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     OnInit,
+    Output,
+    ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -10,6 +13,8 @@ import { FormUsuarioComponent } from './form-usuario/form-usuario.component';
 import { ConfiguracionService } from '../../services/configuracion.service';
 import { User } from '../../models/users';
 import { MatSelectChange } from '@angular/material/select';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Usuario } from '@shared/models/usuario.model';
 
 @Component({
     selector: 'settings-team',
@@ -18,7 +23,9 @@ import { MatSelectChange } from '@angular/material/select';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsTeamComponent implements OnInit {
+    //@Output() usuario: EventEmitter<User> = new EventEmitter<User>();
     public members: User[];
+    public user: User = null;
     public roles = [
         {
             label: 'Operador',
@@ -54,16 +61,18 @@ export class SettingsTeamComponent implements OnInit {
         this.obtenerUsuarios();
     }
     borrarUsuario(user: User): void {
-        this._configService.borrarUsuario(user.id).subscribe( resp =>{
+        this._configService.borrarUsuario(user.id).subscribe((resp) => {
             this.members = resp;
             this._ref.detectChanges();
-        })
+        });
     }
-    cambiarRolUsuario(rol: MatSelectChange,user: User): void {
-        this._configService.cambiarRolUsuario(user.id, rol.value ).subscribe( resp =>{
-            this.members = resp;
-            this._ref.detectChanges();
-        })
+    cambiarRolUsuario(rol: MatSelectChange, user: User): void {
+        this._configService
+            .cambiarRolUsuario(user.id, rol.value)
+            .subscribe((resp) => {
+                this.members = resp;
+                this._ref.detectChanges();
+            });
     }
     crearUsuario(): void {
         this.ventanaFormulario = this._matDialog.open(FormUsuarioComponent, {
@@ -79,12 +88,20 @@ export class SettingsTeamComponent implements OnInit {
         });
     }
     obtenerUsuarios(): void {
-        this._configService.buscarUsuarios().subscribe( resp =>{
+        this._configService.buscarUsuarios().subscribe((resp) => {
             this.members = resp;
             this._ref.detectChanges();
-        })
+        });
     }
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+    verHistorial(user: User): void {
+        // this.usuario.emit(user);
+        //this.matDrawer.open();
+        this.user = user;
+    }
+    cerrarHistorial(): void {
+        this.user = null;
     }
 }

@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    AfterContentInit,
+    ChangeDetectorRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ApexOptions } from 'ng-apexcharts';
 import Swal from 'sweetalert2';
@@ -11,6 +16,7 @@ import { ConfiguracionService } from '../../services/configuracion.service';
     styles: [],
 })
 export class CierreComponent implements OnInit {
+    periodoSistema: number;
     data: any;
     chartGithubIssues: ApexOptions = {};
     chartTaskDistribution: ApexOptions = {};
@@ -20,6 +26,7 @@ export class CierreComponent implements OnInit {
     chartYearlyExpenses: ApexOptions = {};
     constructor(
         private readonly _router: Router,
+        private readonly _changeRef: ChangeDetectorRef,
         private readonly _fuseConfirmationService: FuseConfirmationService,
         private readonly _configService: ConfiguracionService
     ) {}
@@ -80,7 +87,11 @@ export class CierreComponent implements OnInit {
             },
         };
 
-        console.log(this.nroSemana(new Date()));
+        this._configService.periodoSistema().subscribe((resp) => {
+            this.periodoSistema = resp;
+            this._changeRef.detectChanges();
+        });
+        //        console.log(this.nroSemana(new Date()));
     }
     realizarCierre(): void {
         const opciones: any = {

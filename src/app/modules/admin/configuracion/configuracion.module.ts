@@ -11,6 +11,7 @@ import { FormUsuarioComponent } from './components/usuarios/form-usuario/form-us
 import { SettingsTeamComponent } from './components/usuarios/team.component';
 import { CierreComponent } from './components/cierre/cierre.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { BitacoraComponent } from './components/bitacora/bitacora.component';
 
 const rutas: Route[] = [
     {
@@ -25,6 +26,7 @@ const rutas: Route[] = [
         SettingsTeamComponent,
         CierreComponent,
         FormUsuarioComponent,
+        BitacoraComponent,
     ],
     imports: [
         CommonModule,
